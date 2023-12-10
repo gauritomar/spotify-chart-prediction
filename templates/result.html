@@ -5,10 +5,27 @@
   </head>
   <body>
     {% if audio_features %}
-    <h1>Audio Features</h1>
-    <p>Acousticness: {{ audio_features.acousticness }}</p>
-    <p>Danceability: {{ audio_features.danceability }}</p>
-    <!-- Display other audio features as needed -->
+    <h1>Song Details</h1>
+    <h2>{{ audio_features['id'] }}</h2>
+    <p><strong>Danceability:</strong> {{ audio_features['danceability'] }}</p>
+    <p><strong>Energy:</strong> {{ audio_features['energy'] }}</p>
+    <p><strong>Key:</strong> {{ audio_features['key'] }}</p>
+    <p><strong>Loudness:</strong> {{ audio_features['loudness'] }}</p>
+    <p><strong>Mode:</strong> {{ audio_features['mode'] }}</p>
+    <p><strong>Speechiness:</strong> {{ audio_features['speechiness'] }}</p>
+    <p><strong>Acousticness:</strong> {{ audio_features['acousticness'] }}</p>
+    <p>
+      <strong>Instrumentalness:</strong> {{ audio_features['instrumentalness']
+      }}
+    </p>
+    <p><strong>Liveness:</strong> {{ audio_features['liveness'] }}</p>
+    <p><strong>Valence:</strong> {{ audio_features['valence'] }}</p>
+    <p><strong>Tempo:</strong> {{ audio_features['tempo'] }}</p>
+    <p><strong>Duration (ms):</strong> {{ audio_features['duration_ms'] }}</p>
+    <p>
+      <strong>Time Signature:</strong> {{ audio_features['time_signature'] }}
+    </p>
+    <!-- You can add more details or style the layout according to your preferences -->
     {% else %}
     <p>No results found.</p>
     {% endif %}

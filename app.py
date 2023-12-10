@@ -30,7 +30,7 @@ def search_song():
         audio_features = sp.audio_features(track_uri)
         # Process audio_features as needed
         print(audio_features)
-        return render_template('result.html', audio_features=audio_features)
+        return render_template('result.html', audio_features=audio_features[0])
     else:
         return render_template('result.html', audio_features=None)
 
