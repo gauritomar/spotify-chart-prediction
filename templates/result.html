@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Song Details</title>
+  </head>
+  <body>
+    {% if audio_features %}
+    <h1>Audio Features</h1>
+    <p>Acousticness: {{ audio_features.acousticness }}</p>
+    <p>Danceability: {{ audio_features.danceability }}</p>
+    <!-- Display other audio features as needed -->
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+  </body>
+</html>
