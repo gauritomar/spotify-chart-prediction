@@ -2,12 +2,95 @@
 <html>
   <head>
     <title>Search Song</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1db954;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav {
+        background-color: black;
+        color: white;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      nav ul li {
+        float: left;
+      }
+
+      nav ul li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      nav ul li a:hover {
+        background-color: #333;
+      }
+
+      .container {
+        padding: 20px;
+        text-align: center;
+        margin-top: 50px; /* Adjusted to leave space for the navbar */
+      }
+
+      h1 {
+        color: #1db954;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 10px;
+      }
+
+      input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #146542;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
-    <h1>Search for a Song</h1>
-    <form action="/search" method="post">
-      <input type="text" name="song_query" placeholder="Enter song name" />
-      <input type="submit" value="Search" />
-    </form>
+    <nav>
+      <ul>
+        <li><a href="#">Spotify Chart Prediction</a></li>
+        <li><a href="#">Paper Submission</a></li>
+        <li><a href="#">Authors</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <h1>Search for a Song</h1>
+      <form action="/search" method="post">
+        <input type="text" name="song_query" placeholder="Enter song name" />
+        <input type="submit" value="Search" />
+      </form>
+    </div>
   </body>
 </html>

@@ -4,7 +4,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import pandas as pd
 import joblib
-
+import random
 
 app = Flask(__name__)
 
@@ -21,6 +21,20 @@ with open('auth.json') as f:
 auth_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
+def predict_probabilities(xgb_model_10, xgb_model_50, features_10, features_50):
+    # try:
+        # Make prediction for under 10 and under 50
+        probability_under_10 = xgb_model_10.predict_proba(features_10)[:, 1] * 100
+        probability_under_50 = xgb_model_50.predict_proba(features_50)[:, 1] * 100
+    # except Exception as e:
+    #     probability_under_10 = random.uniform(0, 50) 
+    #     probability_under_50 = probability_under_10 + 10 
+
+    # Ensure the difference between the probabilities
+    # if probability_under_50 <= probability_under_10 + 10:
+    #     probability_under_50 = probability_under_10 + 10
+
+        return probability_under_10, probability_under_50
 
 @app.route('/')
 def index():
@@ -29,7 +43,16 @@ def index():
 @app.route('/search', methods=['POST'])
 def search_song():
     query = request.form['song_query']
+
+    if not query:
+        query = "adele hello"
+
     result = sp.search(q=query, limit=1, type='track')
+
+    if not result['tracks']['items']:
+        # If the search result is empty, modify query to "adele hello"
+        query = "adele hello"
+        result = sp.search(q=query, limit=1, type='track')
     
     if result['tracks']['items']:
         track_uri = result['tracks']['items'][0]['uri']
@@ -52,8 +75,8 @@ def search_song():
         features_50 = test_data[['danceability_%', 'valence_%', 'energy_%', 'acousticness_%', 'instrumentalness_%', 'liveness_%', 'speechiness_%']]
 
         # Make prediction for under 10 and under 50
-        probability_under_10 = xgb_model_10.predict_proba(features_10)[:, 1] * 100
-        probability_under_50 = xgb_model_50.predict_proba(features_50)[:, 1] * 100
+        probability_under_10, probability_under_50 = predict_probabilities(xgb_model_10, xgb_model_50, features_10, features_50)
+
 
         return render_template('result.html', audio_features=audio_features,
                                probability_under_10=probability_under_10[0],
