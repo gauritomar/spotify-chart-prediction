@@ -11,52 +11,184 @@
       }
 
       .song-details {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 20px;
         margin-top: 20px;
+      }
+
+      .song-detail {
+        text-align: center;
+        border: 2px solid #1db954;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      .song-detail-number {
+        font-size: 32px;
+        margin-bottom: 5px;
+      }
+
+      .song-detail-text {
+        font-size: 14px;
       }
 
       h1 {
         color: #1db954;
         text-align: center;
       }
-
-      .song-details p {
-        margin: 5px 0;
-      }
-
-      .song-details strong {
-        color: #1db954;
-      }
-
-      .not-found {
+      .congrats-banner {
+        background-color: #333;
         text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      .congrats-text {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .congrats-emoji {
+        font-size: 24px;
+      }
+      .song-detail {
+        position: relative;
+      }
+
+      .fun-fact {
+        display: none;
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #1db954;
+        color: #fff;
+        padding: 8px;
+        border-radius: 5px;
+        width: 200px;
+        font-size: 12px;
+        z-index: 1;
+      }
+
+      .song-detail:hover .fun-fact {
+        display: block;
       }
     </style>
   </head>
   <body>
-    <h1>Song Details</h1>
+    <h1>Analysis of the Song</h1>
     <div class="song-details">
-      <p><strong>ID:</strong> {{ audio_features['id'] }}</p>
-      <p><strong>Danceability:</strong> {{ audio_features['danceability'] }}</p>
-      <p><strong>Energy:</strong> {{ audio_features['energy'] }}</p>
-      <p><strong>Key:</strong> {{ audio_features['key'] }}</p>
-      <p><strong>Loudness:</strong> {{ audio_features['loudness'] }}</p>
-      <p><strong>Mode:</strong> {{ audio_features['mode'] }}</p>
-      <p><strong>Speechiness:</strong> {{ audio_features['speechiness'] }}</p>
-      <p><strong>Acousticness:</strong> {{ audio_features['acousticness'] }}</p>
-      <p>
-        <strong>Instrumentalness:</strong> {{ audio_features['instrumentalness']
-        }}
-      </p>
-      <p><strong>Liveness:</strong> {{ audio_features['liveness'] }}</p>
-      <p><strong>Valence:</strong> {{ audio_features['valence'] }}</p>
-      <p><strong>Tempo:</strong> {{ audio_features['tempo'] }}</p>
-      <p><strong>Duration (ms):</strong> {{ audio_features['duration_ms'] }}</p>
-      <p>
-        <strong>Time Signature:</strong> {{ audio_features['time_signature'] }}
-      </p>
-      <p><strong>Probability in top 10:</strong> {{ probability_under_10 }}%</p>
-        <p><strong>Probability in top 50:</strong> {{ probability_under_50 }}%</p>
+      <div class="song-detail">
+        <div class="song-detail-number">
+          {{ audio_features['danceability'] }}
+        </div>
+        <div class="song-detail-text">Danceability</div>
+        <div class="fun-fact">
+          Songs that make people move have a higher chance of making it to the
+          top 50 charts. Crafting rhythms and beats that compel listeners to
+          groove increases the track's potential for broader appeal and radio
+          play.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">{{ audio_features['energy'] }}</div>
+        <div class="song-detail-text">Energy</div>
+        <div class="fun-fact">
+          Tracks with high energy levels tend to capture attention and stand
+          out. Artists focusing on injecting dynamic, lively elements into their
+          music might find their way into the top 50 as these songs often
+          resonate more with the audience.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">{{ audio_features['key'] }}</div>
+        <div class="song-detail-text">Key</div>
+        <div class="fun-fact">
+          Interestingly, certain keys have historically had better reception
+          among listeners. Exploring different keys and their emotional impact
+          could influence the overall feel of a track and potentially improve
+          its chances of chart success.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">{{ audio_features['loudness'] }}</div>
+        <div class="song-detail-text">Loudness</div>
+        <div class="fun-fact">
+          Louder tracks tend to make a stronger impact on listeners. Striking
+          the right balance between being attention-grabbing and maintaining
+          quality is key to making a mark in the competitive music landscape and
+          reaching the top 50.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">{{ audio_features['mode'] }}</div>
+        <div class="song-detail-text">Mode</div>
+        <div class="fun-fact">
+          Songs in a major mode often connect better with larger audiences.
+          Artists might consider the emotional undertones of major keys when
+          aiming for a broader listener base and a higher chance of charting.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">
+          {{ audio_features['speechiness'] }}
+        </div>
+        <div class="song-detail-text">Speechiness</div>
+        <div class="fun-fact">
+          Incorporating spoken words in a track can add an intriguing dimension.
+          Finding the right blend of sung and spoken elements could create a
+          unique sonic experience, potentially captivating audiences and aiding
+          in chart placement.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">
+          {{ audio_features['acousticness'] }}
+        </div>
+        <div class="song-detail-text">Acousticness</div>
+        <div class="fun-fact">
+          While acoustic songs have their charm, the charts often favor tracks
+          with fewer acoustic elements. Artists exploring a blend of acoustic
+          and electronic sounds might align better with current listener trends
+          and increase their chances of charting.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">
+          {{ audio_features['instrumentalness'] }}
+        </div>
+        <div class="song-detail-text">Instrumentalness</div>
+        <div class="fun-fact">
+          Balancing vocals and instrumental elements is crucial. Songs with a
+          balanced mix often appeal to a wider audience, potentially increasing
+          the track's chances of climbing the charts and gaining popularity.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">{{ audio_features['liveness'] }}</div>
+        <div class="song-detail-text">Liveness</div>
+        <div class="fun-fact">
+          Surprisingly, the presence of audience recordings doesn't
+          significantly impact a track's chart performance. Artists might focus
+          more on other attributes to create a standout piece rather than solely
+          emphasizing audience participation for chart success.
+        </div>
+      </div>
+      <div class="song-detail">
+        <div class="song-detail-number">
+          {{ audio_features['speechiness'] }}
+        </div>
+        <div class="song-detail-text">Speechiness</div>
+      </div>
     </div>
+
+    <div class="congrats-banner">
+      <p class="congrats-text">
+        Your song has a {{ probability_under_50 }}% chance of making it to the
+        top 50 chart! 🎉🥳
+      </p>
     </div>
   </body>
 </html>
